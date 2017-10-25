@@ -1,6 +1,12 @@
 # Prerequisites
 *.d
 
+#Visual Studio files
+*.user
+*.opensdf
+*.sdf
+*.suo
+
 # Compiled Object files
 *.slo
 *.lo
