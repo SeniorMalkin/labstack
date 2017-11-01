@@ -3,6 +3,6 @@
 	using namespace std;
 void main()
 {
-	TStack s;
+	TStack<int> s;
 	cout<<"Hello world!";
 }
