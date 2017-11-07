@@ -1,5 +1,6 @@
 #pragma once
 #include <stdexcept>
+using namespace std;
 template <class T>
 class TStack
 {
@@ -11,6 +12,7 @@ public:
 	~TStack(void);
 	TStack(const TStack& ts);
 	TStack& operator=(const TStack& ts);
+	bool operator==(const TStack& ts) const;  
 	bool IsFull(void);
 	bool IsEmpty(void);
 	T Top(void);
@@ -21,7 +23,7 @@ public:
 template <class T>
 	TStack<T>::TStack(int _size=200)
 	{
-		arr= new T[size];
+		arr= new T[_size];
 		maxsize=_size;
 		size=0;
 	}
@@ -46,13 +48,24 @@ template <class T>
 		if(maxsize !=ts.maxsize)
 		{
 			delete[] arr;
-			arr= new arr[ts.maxsize];
+			arr= new T[ts.maxsize];
 		}
 		size = ts.size;
 		for(int i=0;i<size;i++)
 			arr[i]=ts.arr[i];
 		return *this;
 
+	}
+	template <class T>
+	bool TStack<T>::operator==(const TStack& ts) const
+	{
+		if (size != ts.size)
+			return false;
+		else
+			for (int i = 0; i <= size; i++)
+				if (arr[i] != ts.arr[i])
+					return false;
+		return true;
 	}
 template <class T>
 bool TStack<T>::IsFull(void)
