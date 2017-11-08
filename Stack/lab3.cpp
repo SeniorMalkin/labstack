@@ -7,11 +7,12 @@ void main()
 	try
 	{
 		string mystr;
-		mystr = "3+(2+(2+3)*4)";
+		//cin >> mystr;
+		mystr = "5.2+3.1*10";
 		TCalculator a(mystr);
 		a.ToPostfix();
 		a.WritePost();
-		a.Calculate();
+		cout << endl << a.Calculate();
 	}
 	catch (invalid_argument& e)
 	{

@@ -29,7 +29,9 @@ bool TCalculator::Check()
 void TCalculator::ToPostfix()
 {
 	stc.Clear();
-	string buf = '(' + infix + ')';
+	string buf = "(";
+	buf+=infix;
+	buf+=")";
 	for (int i = 0; i < buf.size(); i++)
 	{
 		if (buf[i] == '(')
@@ -90,37 +92,34 @@ void TCalculator::ToPostfix()
 	 double fo, so,res;
 	 for (int i = 0; i < postfix.size(); i++)
 	 {
-		 if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/')
+		 if (postfix[i] == '+' || postfix[i] == '-' || postfix[i] == '*' || postfix[i] == '/' || postfix[i] == '^')
 		 {
+			 so = number.Pop();
+			 fo = number.Pop();
 			 switch (postfix[i])
 			 {
 			 case '+':
-				 so = number.Pop();
-				 fo = number.Pop();
-				 res = fo + so;
 				 number.Push(fo+so);
 				 break;
 			 case '-':
-				 so = number.Pop();
-				 fo = number.Pop();
 				 number.Push(fo - so);
 				 break;
 			 case '*':
-				 so = number.Pop();
-				 fo = number.Pop();
 				 number.Push(fo * so);
 				 break;
 			 case '/':
-				 so = number.Pop();
-				 fo = number.Pop();
 				 number.Push(fo / so);
 				 break;
+			 case '^':
+				  number.Push(pow(fo,so));
+				 break;
+
 			 }
 		 }
 
-		 if (postfix[i] != ' ' && postfix[i] != '+' && postfix[i] != '-' && postfix[i] != '*' && postfix[i] != '/')
+		 if(postfix[i] >= '0' && postfix[i] <= '9' || postfix[i] == '.')
 			 el += postfix[i];
-		 if (postfix[i] == ' ' && el!="")
+		 if (postfix[i] == ' ' && el.size()!=0)
 		 {
 			 number.Push(atof(el.c_str()));
 			 el = "";
@@ -131,6 +130,11 @@ void TCalculator::ToPostfix()
  }
  string TCalculator::WritePost()
  {
+	 int i=0;
+	 char* tmp;
+	 strtod(&infix[0],&tmp);
+	 if((tmp+1)[0]>='0' && (tmp+1)[0]<='9' || (tmp+1)[0]=='(')
+		 i++;
 	 return postfix;
  }
 TCalculator::~TCalculator()

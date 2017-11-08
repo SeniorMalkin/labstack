@@ -1,6 +1,7 @@
 #pragma once
 # include "TStack.h"
 # include <cstdlib>
+# include <cmath>
 class TCalculator
 {
 	string infix;
