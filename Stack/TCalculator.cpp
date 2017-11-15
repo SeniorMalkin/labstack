@@ -130,11 +130,15 @@ void TCalculator::ToPostfix()
  }
  string TCalculator::WritePost()
  {
-	 int i=0;
+	/* int i=0;
 	 char* tmp;
 	 strtod(&infix[0],&tmp);
+	 if(tmp[0]=='(')
+		 if((tmp+1)[0]<='0' || (tmp+1)[0]>='9')
+			 //return false;
 	 if((tmp+1)[0]>='0' && (tmp+1)[0]<='9' || (tmp+1)[0]=='(')
 		 i++;
+		 */
 	 return postfix;
  }
 TCalculator::~TCalculator()
