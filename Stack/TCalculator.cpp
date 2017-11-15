@@ -12,19 +12,103 @@ bool TCalculator::Check()
 	stc.Clear();
 	for (int i = 0; i < infix.size(); i++)
 	{
-		if (infix[i] = '(')
+		if (infix[i] == '(')
 			stc.Push('(');
-		if (infix[i] = ')')
+		if (infix[i] == ')')
 		{
 			if (stc.IsEmpty())
 				return false;
 			stc.Pop();
 		}
 	}
+	
+	string ch_infix = infix;
+	char* tmp;
+	strtod(&ch_infix[0], &tmp);
+	while (ch_infix.size() != 0)
+	{
+		switch (tmp[0])
+		{
+		case '(':
+			if (tmp[1] <= '0' || tmp[1] >= '9')
+				if (tmp[1] != '(')
+					throw 1;
+			ch_infix = tmp+1;
+			if (tmp[0] >= '0' && tmp[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = tmp;
+
+			}
+			break;
+		case '+':
+			if (tmp[1] <= '0' || tmp[1] >= '9')
+				if (tmp[1] != '(')
+					throw 1;
+			tmp++;
+			ch_infix = *tmp;
+			if (tmp[0] >= '0' && tmp[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = *tmp;
+
+			}
+			break;
+		case '-':
+			if (tmp[1] <= '0' || tmp[1] >= '9')
+				if (tmp[1] != '(')
+					throw 1;
+			tmp++;
+			ch_infix = *tmp;
+			if (tmp[0] >= '0' && tmp[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = *tmp;
+
+			}
+			break;
+		case '*':
+			if (tmp[1] <= '0' || tmp[1] >= '9')
+				if (tmp[1] != '(')
+					throw 1;
+			tmp++;
+			ch_infix = *tmp;
+			if (tmp[0] >= '0' && tmp[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = *tmp;
+
+			}
+			break;
+		case '/':
+			if (tmp[1] <= '0' || tmp[1] >= '9')
+				if (tmp[1] != '(')
+					throw 1;
+			tmp++;
+			ch_infix = *tmp;
+			if (tmp[0] >= '0' && tmp[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = *tmp;
+
+			}
+			break;
+		case ')':
+			if (tmp[1] != '+' && tmp[1] != '-' && tmp[1] != '*' && tmp[1] != '/' && tmp[1] != '^')
+				throw 1;
+			ch_infix = tmp + 1;
+			strtod(&ch_infix[0], &tmp);
+			break;
+		default:
+			throw 1;
+			break;
+		}
+	}
 	if (stc.IsEmpty())
 		return true;
 	else
 		return false;
+	
 }
 void TCalculator::ToPostfix()
 {
