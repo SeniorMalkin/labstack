@@ -7,6 +7,114 @@ TCalculator::TCalculator(string str)
 	infix = str;
 	postfix = "";
 }
+void TCalculator::expr()
+{
+	string ch_infix = infix;
+	char* tmp;
+	if(ch_infix[0]!='(')
+		if(ch_infix[0] <= '0' || ch_infix[0] >= '9')
+			throw logic_error("Invalid expression");
+	strtod(&ch_infix[0], &tmp);
+	ch_infix=tmp;
+	tmp=NULL;
+	while (ch_infix.size() != 0)
+	{
+		switch (ch_infix[0])
+		{
+		case '(':
+			if (ch_infix[1] < '0' || ch_infix[1] > '9')
+				if (ch_infix[1] != '(')
+					throw logic_error("Invalid expression");
+			ch_infix=ch_infix.substr(1);
+			//ch_infix = strcpy(buf,ch_infix.c_str(),1);
+			if (ch_infix[0] >= '0' && ch_infix[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = tmp;
+				tmp=NULL;
+
+			}
+			break;
+		case '+':
+			if (ch_infix[1] < '0' || ch_infix[1] > '9')
+				if (ch_infix[1] != '(')
+					throw logic_error("Invalid expression");
+			ch_infix=ch_infix.substr(1);
+			if (ch_infix[0] >= '0' && ch_infix[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = tmp;
+				tmp=NULL;
+
+			}
+			break;
+		case '-':
+			if (ch_infix[1] < '0' || ch_infix[1] > '9')
+				if (ch_infix[1] != '(')
+					throw logic_error("Invalid expression");
+			ch_infix=ch_infix.substr(1);
+			if (ch_infix[0] >= '0' && ch_infix[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = tmp;
+				tmp=NULL;
+
+			}
+			break;
+		case '*':
+			if (ch_infix[1] < '0' || ch_infix[1] > '9')
+				if (ch_infix[1] != '(')
+					throw logic_error("Invalid expression");
+			ch_infix=ch_infix.substr(1);
+			if (ch_infix[0] >= '0' && ch_infix[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = tmp;
+				tmp=NULL;
+
+			}
+			break;
+		case '/':
+			if (ch_infix[1] < '0' || ch_infix[1] > '9')
+				if (ch_infix[1] != '(')
+					throw logic_error("Invalid expression");
+			ch_infix=ch_infix.substr(1);
+			if (ch_infix[0] >= '0' && ch_infix[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = tmp;
+				tmp=NULL;
+
+			}
+			break;
+		case '^':
+			if (ch_infix[1] < '0' || ch_infix[1] > '9')
+				if (ch_infix[1] != '(')
+					throw logic_error("Invalid expression");
+			ch_infix=ch_infix.substr(1);
+			if (ch_infix[0] >= '0' && ch_infix[0] <= '9')
+			{
+				strtod(&ch_infix[0], &tmp);
+				ch_infix = tmp;
+				tmp=NULL;
+
+			}
+			break;
+		case ')':
+			if (ch_infix[1] != '+' && ch_infix[1] != '-' && ch_infix[1] != '*' && ch_infix[1] != '/' && ch_infix[1] != '^')
+				throw logic_error("Invalid expression");
+			ch_infix=ch_infix.substr(1);
+		/*	strtod(&ch_infix[0], &tmp);
+			ch_infix = tmp;
+			tmp=NULL;
+			*/
+			break;
+		default:
+			throw logic_error("Invalid expression");
+			break;
+		}
+	}
+}
 bool TCalculator::Check()
 {
 	stc.Clear();
@@ -22,88 +130,6 @@ bool TCalculator::Check()
 		}
 	}
 	
-	string ch_infix = infix;
-	char* tmp;
-	strtod(&ch_infix[0], &tmp);
-	while (ch_infix.size() != 0)
-	{
-		switch (tmp[0])
-		{
-		case '(':
-			if (tmp[1] <= '0' || tmp[1] >= '9')
-				if (tmp[1] != '(')
-					throw 1;
-			ch_infix = tmp+1;
-			if (tmp[0] >= '0' && tmp[0] <= '9')
-			{
-				strtod(&ch_infix[0], &tmp);
-				ch_infix = tmp;
-
-			}
-			break;
-		case '+':
-			if (tmp[1] <= '0' || tmp[1] >= '9')
-				if (tmp[1] != '(')
-					throw 1;
-			tmp++;
-			ch_infix = *tmp;
-			if (tmp[0] >= '0' && tmp[0] <= '9')
-			{
-				strtod(&ch_infix[0], &tmp);
-				ch_infix = *tmp;
-
-			}
-			break;
-		case '-':
-			if (tmp[1] <= '0' || tmp[1] >= '9')
-				if (tmp[1] != '(')
-					throw 1;
-			tmp++;
-			ch_infix = *tmp;
-			if (tmp[0] >= '0' && tmp[0] <= '9')
-			{
-				strtod(&ch_infix[0], &tmp);
-				ch_infix = *tmp;
-
-			}
-			break;
-		case '*':
-			if (tmp[1] <= '0' || tmp[1] >= '9')
-				if (tmp[1] != '(')
-					throw 1;
-			tmp++;
-			ch_infix = *tmp;
-			if (tmp[0] >= '0' && tmp[0] <= '9')
-			{
-				strtod(&ch_infix[0], &tmp);
-				ch_infix = *tmp;
-
-			}
-			break;
-		case '/':
-			if (tmp[1] <= '0' || tmp[1] >= '9')
-				if (tmp[1] != '(')
-					throw 1;
-			tmp++;
-			ch_infix = *tmp;
-			if (tmp[0] >= '0' && tmp[0] <= '9')
-			{
-				strtod(&ch_infix[0], &tmp);
-				ch_infix = *tmp;
-
-			}
-			break;
-		case ')':
-			if (tmp[1] != '+' && tmp[1] != '-' && tmp[1] != '*' && tmp[1] != '/' && tmp[1] != '^')
-				throw 1;
-			ch_infix = tmp + 1;
-			strtod(&ch_infix[0], &tmp);
-			break;
-		default:
-			throw 1;
-			break;
-		}
-	}
 	if (stc.IsEmpty())
 		return true;
 	else
@@ -112,6 +138,8 @@ bool TCalculator::Check()
 }
 void TCalculator::ToPostfix()
 {
+	if(!Check())
+		throw logic_error("Invalid expression");
 	stc.Clear();
 	string buf = "(";
 	buf+=infix;

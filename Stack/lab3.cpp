@@ -8,9 +8,9 @@ void main()
 	{
 		string mystr;
 		//cin >> mystr;
-		mystr = "((2+3)+3)*3";
+		mystr = "(0.2*10+3)^2";
 		TCalculator a(mystr);
-		a.Check();
+		a.expr();
 		a.ToPostfix();
 		a.WritePost();
 		cout << endl << a.Calculate();

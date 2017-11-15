@@ -11,6 +11,7 @@ class TCalculator
 public:
 	TCalculator(string str = " ");
 	bool Check();
+	void expr();
 	void ToPostfix();
 	friend int Priority(char el);
 	string WritePost();
